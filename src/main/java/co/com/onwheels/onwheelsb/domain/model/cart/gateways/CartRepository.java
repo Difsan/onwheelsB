@@ -4,7 +4,7 @@ import co.com.onwheels.onwheelsb.domain.model.cart.Cart;
 import co.com.onwheels.onwheelsb.domain.model.item.Item;
 import reactor.core.publisher.Mono;
 
-public interface CartReposiroty {
+public interface CartRepository {
 
     Mono<Cart> getCartById(String cartId);
 
