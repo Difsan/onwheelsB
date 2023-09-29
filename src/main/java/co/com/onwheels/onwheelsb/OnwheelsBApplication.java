@@ -1,4 +1,4 @@
-package co.com.onwheels.onwheelsB;
+package co.com.onwheels.onwheelsb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
