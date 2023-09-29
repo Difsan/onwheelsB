@@ -1,4 +1,4 @@
-package co.com.onwheels.onwheelsb.domain.model.product.receipt.savereceipt;
+package co.com.onwheels.onwheelsb.domain.usecase.receipt.savereceipt;
 
 import co.com.onwheels.onwheelsb.domain.model.receipt.Receipt;
 import co.com.onwheels.onwheelsb.domain.model.receipt.gateways.ReceiptRepository;

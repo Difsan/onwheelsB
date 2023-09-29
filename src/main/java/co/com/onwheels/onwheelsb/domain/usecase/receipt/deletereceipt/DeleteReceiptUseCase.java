@@ -1,4 +1,4 @@
-package co.com.onwheels.onwheelsb.domain.model.product.receipt.deletereceipt;
+package co.com.onwheels.onwheelsb.domain.usecase.receipt.deletereceipt;
 
 import co.com.onwheels.onwheelsb.domain.model.receipt.gateways.ReceiptRepository;
 import lombok.RequiredArgsConstructor;

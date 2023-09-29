@@ -1,19 +1,19 @@
-package co.com.onwheels.onwheelsb.domain.model.product.receipt.getreceiptbyid;
+package co.com.onwheels.onwheelsb.domain.usecase.receipt.getallreceiptsbyuserid;
 
 import co.com.onwheels.onwheelsb.domain.model.receipt.Receipt;
 import co.com.onwheels.onwheelsb.domain.model.receipt.gateways.ReceiptRepository;
 import lombok.RequiredArgsConstructor;
-import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
 
 import java.util.function.Function;
 
 @RequiredArgsConstructor
-public class GetReceiptByIdUseCase implements Function<String, Mono<Receipt>> {
+public class GetAllReceiptsByUserIdUseCase implements Function<String, Flux<Receipt>> {
 
     private final ReceiptRepository receiptRepository;
 
     @Override
-    public Mono<Receipt> apply(String receiptId) {
-        return receiptRepository.getReceiptById(receiptId);
+    public Flux<Receipt> apply(String userId) {
+        return receiptRepository.getAllReceiptsByUserId(userId);
     }
 }

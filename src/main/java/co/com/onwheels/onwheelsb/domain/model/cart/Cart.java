@@ -14,7 +14,7 @@ import java.util.UUID;
 @Builder(toBuilder = true)
 public class Cart {
 
-    private String id = UUID.randomUUID().toString().substring(0,10);
+    private String id;
     private Set<Item> items = new HashSet<>();
     private Double totalPrice;
 }
