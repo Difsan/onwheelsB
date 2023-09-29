@@ -17,7 +17,7 @@ public class Product {
     private String image;
     private String category;
     private Double unitaryPrice;
-    private int ivaValue;
+    private Integer ivaValue;
     private Integer inventory;
     private Boolean inStock;
 }

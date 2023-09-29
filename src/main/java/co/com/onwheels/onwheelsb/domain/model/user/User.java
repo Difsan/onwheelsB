@@ -15,5 +15,5 @@ public class User {
     private String email;
     private String password;
     private Cart cart;
-    private boolean admin;
+    private Boolean admin;
 }
