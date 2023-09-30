@@ -9,6 +9,7 @@ public interface ProductRepository {
 
     Mono<Product> getProductById(String productId);
 
+    // to search just with some letter
     Flux<Product> getProductsByName(String productName);
 
     Flux<Product> getProductsByModel(String model);
