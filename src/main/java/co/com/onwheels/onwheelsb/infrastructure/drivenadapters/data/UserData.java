@@ -37,14 +37,13 @@ public class UserData {
 
     @NotNull(message = "Password can't be null")
     @NotBlank(message = "Password can't be empty")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?\":{}|<>])(?=\\S+$).{10}$",
-            message = "password must be 15 characters long, include at least one number, one capital letter, and one special character")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?\":{}|<>])(?=\\S+$)",
+            message = "password must be include at least one number, one capital letter, and one special character")
     private String password;
 
     private CartData cart;
 
     @NotNull(message = "admin can't be null")
-    @NotBlank(message = "admin can't be empty")
     private boolean admin;
 
 }

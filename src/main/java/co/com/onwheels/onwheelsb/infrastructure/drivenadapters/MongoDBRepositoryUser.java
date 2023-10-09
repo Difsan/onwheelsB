@@ -8,6 +8,6 @@ import reactor.core.publisher.Mono;
 
 public interface MongoDBRepositoryUser extends ReactiveMongoRepository<UserData, String> {
     Mono<User> findByEmail(String email);
-    Flux<User> findByAdmin(boolean admin);
+    Flux<User> findByAdmin(Boolean admin);
     Mono<User> findByCartId(String cartId);
 }

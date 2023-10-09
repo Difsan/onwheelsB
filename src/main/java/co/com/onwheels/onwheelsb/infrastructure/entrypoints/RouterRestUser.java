@@ -33,7 +33,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 public class RouterRestUser {
 
     @Bean
-    @RouterOperation(path="/users/{admin}", produces = {
+    @RouterOperation(path="/users/byAdmin/{admin}", produces = {
             MediaType.APPLICATION_JSON_VALUE},
             beanClass = GetAllUserByAdminUseCase.class,
             method = RequestMethod.GET,
@@ -46,7 +46,7 @@ public class RouterRestUser {
                             @ApiResponse(responseCode = "404", description = "Not Found")
                     }))
     public RouterFunction<ServerResponse> getUsersByAdmin (GetAllUserByAdminUseCase getAllUserByAdminUseCase){
-        return route(GET("/users/{admin}"),
+        return route(GET("/users/byAdmin/{admin}"),
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(getAllUserByAdminUseCase.apply(Boolean.parseBoolean(request.pathVariable("admin"))), User.class))
@@ -55,7 +55,7 @@ public class RouterRestUser {
     }
 
     @Bean
-    @RouterOperation(path = "/users/{userId}", produces = {
+    @RouterOperation(path = "/users/byId/{userId}", produces = {
             MediaType.APPLICATION_JSON_VALUE},
             beanClass = GetUserByIdUseCase.class,
             method = RequestMethod.GET,
@@ -68,7 +68,7 @@ public class RouterRestUser {
                             @ApiResponse(responseCode = "404", description = "Not Found")
                     }))
     public RouterFunction<ServerResponse> getUserById (GetUserByIdUseCase getUserByIdUseCase){
-        return route(GET("/users/{userId}"),
+        return route(GET("/users/byId/{userId}"),
                 request -> getUserByIdUseCase.apply(request.pathVariable("userId"))
                         .flatMap(product -> ServerResponse.ok()
                                 .contentType(MediaType.APPLICATION_JSON)

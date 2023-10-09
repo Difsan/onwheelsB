@@ -23,7 +23,6 @@ public class MongoRepositoryAdapterUser implements UserRepository
                 .switchIfEmpty(Mono.error(new Throwable("No users available")))
                 .map(userData -> mapper.map(userData, User.class));
     }
-
     @Override
     public Mono<User> getUserById(String userId) {
         return this.repository
