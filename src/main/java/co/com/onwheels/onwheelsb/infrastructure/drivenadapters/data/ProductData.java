@@ -21,10 +21,12 @@ public class ProductData {
 
     @NotNull(message = "Name can't be null")
     @NotBlank(message = "Name can't be empty")
+    @Pattern(regexp = "^[A-Z][a-z]*$", message = "First letter must be uppercase, and others must be lowercase")
     private String name;
 
     @NotNull(message = "Brand can't be null")
     @NotBlank(message = "Brand can't be empty")
+    @Pattern(regexp = "^[A-Z][a-z]*$", message = "First letter must be uppercase, and others must be lowercase")
     private String brand;
 
     @NotNull(message = "model can't be null")
@@ -45,18 +47,15 @@ public class ProductData {
     private String category;
 
     @NotNull(message = "UnitaryPrice can't be null")
-    @NotBlank(message = "UnitaryPrice can't be empty")
     private Double unitaryPrice;
 
     @NotNull(message = "UnitaryPrice can't be null")
-    @NotBlank(message = "UnitaryPrice can't be empty")
     private Integer ivaValue;
 
     @NotNull(message = "Inventory can't be null")
-    @NotBlank(message = "Inventory can't be empty")
     private Integer inventory;
 
-    private boolean inStock;
+    private boolean inStock= true;
 
 
 }

@@ -60,7 +60,8 @@ public class RouterRestUser {
                                     .contentType(MediaType.APPLICATION_JSON)
                                     .bodyValue(users);
                         }
-                    });
+                    })
+                    .onErrorResume(throwable -> ServerResponse.status(HttpStatus.INTERNAL_SERVER_ERROR).bodyValue("Error occurred: " + throwable.getMessage()));
         });
     }
     @Bean
@@ -127,9 +128,9 @@ public class RouterRestUser {
     public RouterFunction<ServerResponse> getUserByEmail (GetUserByEmailUseCase getuserbyemailUseCase){
         return route(GET("/users/byEmail/{email}"),
                 request -> getuserbyemailUseCase.apply(request.pathVariable("email"))
-                        .flatMap(product -> ServerResponse.ok()
+                        .flatMap(user -> ServerResponse.ok()
                                 .contentType(MediaType.APPLICATION_JSON)
-                                .bodyValue(product))
+                                .bodyValue(user))
                         .onErrorResume(throwable -> ServerResponse.status(HttpStatus.NOT_FOUND)
                                 .bodyValue(throwable.getMessage()))
         );
