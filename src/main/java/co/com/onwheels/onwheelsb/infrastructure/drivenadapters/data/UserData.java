@@ -37,8 +37,9 @@ public class UserData {
 
     @NotNull(message = "Password can't be null")
     @NotBlank(message = "Password can't be empty")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?\":{}|<>])(?=\\S+$)",
-            message = "password must be include at least one number, one capital letter, and one special character")
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[\\u0021-\\u002b\\u003c-\\u0040])(?=.*[A-Z])(?=.*[a-z])\\S{4,}$",
+            message = """
+                    password must be include at least one number, one capital letter,one lowercase letter, and one special character between: '! " # $ % & ' ( ) * + , - . / : ; < = > ? @'""")
     private String password;
 
     private CartData cart;

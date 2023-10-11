@@ -20,7 +20,7 @@ public class MongoRepositoryAdapterUser implements UserRepository
     @Override
     public Flux<User> getAllUsersByAdmin(Boolean admin) {
         return repository.findByAdmin(admin)
-                .switchIfEmpty(Mono.error(new Throwable("No users available")))
+                .switchIfEmpty(Flux.empty())
                 .map(userData -> mapper.map(userData, User.class));
     }
     @Override

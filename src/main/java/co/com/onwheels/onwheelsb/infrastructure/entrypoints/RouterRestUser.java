@@ -22,9 +22,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
+import reactor.core.publisher.Flux;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
@@ -45,15 +45,24 @@ public class RouterRestUser {
                                     content = @Content (schema = @Schema(implementation = User.class))),
                             @ApiResponse(responseCode = "404", description = "Not Found")
                     }))
-    public RouterFunction<ServerResponse> getUsersByAdmin (GetAllUserByAdminUseCase getAllUserByAdminUseCase){
-        return route(GET("/users/byAdmin/{admin}"),
-                request -> ServerResponse.ok()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(BodyInserters.fromPublisher(getAllUserByAdminUseCase.apply(Boolean.parseBoolean(request.pathVariable("admin"))), User.class))
-                        .onErrorResume(throwable -> ServerResponse.status(HttpStatus.NOT_FOUND).bodyValue(throwable.getMessage()))
-        );
-    }
+    public RouterFunction<ServerResponse> getUsersByAdmin(GetAllUserByAdminUseCase getAllUserByAdminUseCase) {
+        return route(GET("/users/byAdmin/{admin}"), request -> {
+            Boolean isAdmin = Boolean.parseBoolean(request.pathVariable("admin"));
+            Flux<User> userFlux = getAllUserByAdminUseCase.apply(isAdmin);
 
+            return userFlux
+                    .collectList()
+                    .flatMap(users -> {
+                        if (users.isEmpty()) {
+                            return ServerResponse.status(HttpStatus.NOT_FOUND).bodyValue("No users available for the given parameter: " + isAdmin);
+                        } else {
+                            return ServerResponse.ok()
+                                    .contentType(MediaType.APPLICATION_JSON)
+                                    .bodyValue(users);
+                        }
+                    });
+        });
+    }
     @Bean
     @RouterOperation(path = "/users/byId/{userId}", produces = {
             MediaType.APPLICATION_JSON_VALUE},
