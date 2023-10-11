@@ -55,7 +55,10 @@ public class ProductData {
     @NotNull(message = "Inventory can't be null")
     private Integer inventory;
 
-    private boolean inStock= true;
+    private boolean inStock;
 
-
+    public void setInventory(Integer inventory) {
+        this.inventory = inventory != null ? inventory : 0;
+        this.inStock = this.inventory > 0;
+    }
 }
