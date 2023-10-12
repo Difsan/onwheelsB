@@ -50,7 +50,7 @@ public class ProductData {
     private Double unitaryPrice;
 
     @NotNull(message = "UnitaryPrice can't be null")
-    private Integer ivaValue;
+    private Double ivaValue;
 
     @NotNull(message = "Inventory can't be null")
     private Integer inventory;
